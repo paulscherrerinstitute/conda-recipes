@@ -16,10 +16,10 @@ build:
 requirements:
   build:
 #    - perl
-    - readline
+    - readline [linux]
 
   run:
-    - readline
+    - readline [linux]
 
 about:
     home: http://www.aps.anl.gov/epics
