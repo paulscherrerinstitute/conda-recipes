@@ -9,8 +9,8 @@ EPICS_BASE=$PREFIX/epics
 EPICS_HOST_ARCH=$(startup/EpicsHostArch)
 
 # Copy libraries into $PREFIX/lib
-cp -av $PREFIX/epics/lib/$EPICS_HOST_ARCH/lib*so* $PREFIX/lib  # linux
-cp -av $PREFIX/epics/lib/$EPICS_HOST_ARCH/lib*dylib* $PREFIX/lib  # osx
+cp -av $PREFIX/epics/lib/$EPICS_HOST_ARCH/lib*so* $PREFIX/lib 2>/dev/null || : # linux
+cp -av $PREFIX/epics/lib/$EPICS_HOST_ARCH/lib*dylib* $PREFIX/lib 2>/dev/null || :  # osx
 
 # Setup symlinks for utilities
 BINS="caget caput camonitor softIoc"
