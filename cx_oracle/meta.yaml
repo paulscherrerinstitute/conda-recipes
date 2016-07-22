@@ -1,0 +1,62 @@
+package:
+  name: cx_oracle
+  version: "5.2.1"
+
+source:
+  fn: cx_Oracle-5.2.1.tar.gz
+  url: https://files.pythonhosted.org/packages/95/7f/3b74fe3adeb5948187b760330cb7e9175e3484bd6defdfeb9b504d71b4b3/cx_Oracle-5.2.1.tar.gz
+  md5: 65a6bcc5217a9502c10e33fcea2982f3
+#  patches:
+   # List any patch files here
+   # - fix.patch
+
+# build:
+  # noarch_python: True
+  # preserve_egg_dir: True
+  # entry_points:
+    # Put any entry points (scripts to be generated automatically) here. The
+    # syntax is module:function.  For example
+    #
+    # - cx_oracle = cx_oracle:main
+    #
+    # Would create an entry point called cx_oracle that calls cx_oracle.main()
+
+
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  # number: 1
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - oracle-instantclient
+
+  run:
+    - python
+    - oracle-instantclient
+
+# test:
+  # Python imports
+  # imports:
+
+  # commands:
+    # You can put test commands to be run here.  Use this to test that the
+    # entry points work.
+
+
+  # You can also put a file called run_test.py in the recipe that will be run
+  # at test time.
+
+  # requires:
+    # Put any additional test requirements here.  For example
+    # - nose
+
+about:
+  home: http://cx-oracle.sourceforge.net
+  license: Python Software Foundation License
+  summary: 'Python interface to Oracle'
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
