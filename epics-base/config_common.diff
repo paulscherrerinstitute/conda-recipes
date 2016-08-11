@@ -5,7 +5,7 @@
  
  # Makefile specific flags
 -USR_INCLUDES =
-+USR_INCLUDES = -I c:\Anaconda3\envs\_build\Library\include
++USR_INCLUDES = -I $(CYGWIN_PREFIX)/include
  USR_CFLAGS =
  USR_CXXFLAGS =
  USR_LDFLAGS =
