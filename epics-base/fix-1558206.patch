@@ -1,0 +1,103 @@
+=== modified file 'src/libCom/osi/epicsThread.cpp'
+--- src/libCom/osi/epicsThread.cpp	2011-01-15 01:01:53 +0000
++++ src/libCom/osi/epicsThread.cpp	2016-03-16 23:15:14 +0000
+@@ -78,36 +78,37 @@
+ {
+     epicsThread * pThread = 
+         static_cast <epicsThread *> ( pPvt );
+-    bool waitRelease = false;
++    bool threadDestroyed = false;
+     try {
+-        pThread->pWaitReleaseFlag = & waitRelease;
++        pThread->pThreadDestroyed = & threadDestroyed;
+         if ( pThread->beginWait () ) {
+             pThread->runable.run ();
+-            // current thread may have run the destructor 
+-            // so must not touch the this pointer from
+-            // here on down if waitRelease is true
++            // The run() routine may have destroyed the epicsThread
++            // object by now; pThread can only be used below here
++            // when the threadDestroyed flag is false.
+         }
+     }
+     catch ( const epicsThread::exitException & ) {
+     }
+     catch ( std::exception & except ) {
+-        if ( ! waitRelease ) {
+-            pThread->printLastChanceExceptionMessage ( 
++        if ( ! threadDestroyed ) {
++            pThread->printLastChanceExceptionMessage (
+                 typeid ( except ).name (), except.what () );
+         }
+     }
+     catch ( ... ) {
+-        if ( ! waitRelease ) {
+-            pThread->printLastChanceExceptionMessage ( 
++        if ( ! threadDestroyed ) {
++            pThread->printLastChanceExceptionMessage (
+                 "catch ( ... )", "Non-standard C++ exception" );
+         }
+     }
+-    if ( ! waitRelease ) {
++    if ( ! threadDestroyed ) {
+         epicsGuard < epicsMutex > guard ( pThread->mutex );
++        pThread->pThreadDestroyed = NULL;
+         pThread->terminated = true;
+         pThread->exitEvent.signal ();
+-        // once the terminated flag is set and we release the lock
+-        // then the "this" pointer must not be touched again
++        // After the terminated flag is set and guard's destructor
++        // releases the lock, pThread must never be used again.
+     }
+ }
+ 
+@@ -135,12 +136,12 @@
+ bool epicsThread::exitWait ( const double delay ) throw ()
+ {
+     try {
+-        // if destructor is running in managed thread then of 
+-        // course we will not wait for the managed thread to 
+-        // exit
++        // When called (usually by a destructor) in the context of
++        // the managed thread we can't wait for the thread to exit.
++        // Set the threadDestroyed flag and return success.
+         if ( this->isCurrentThread() ) {
+-            if ( this->pWaitReleaseFlag ) {
+-                *this->pWaitReleaseFlag = true;
++            if ( this->pThreadDestroyed ) {
++                *this->pThreadDestroyed = true;
+             }
+             return true;
+         }
+@@ -177,7 +178,7 @@
+ epicsThread::epicsThread ( 
+     epicsThreadRunable & runableIn, const char * pName,
+         unsigned stackSize, unsigned priority ) :
+-    runable ( runableIn ), id ( 0 ), pWaitReleaseFlag ( 0 ),
++    runable ( runableIn ), id ( 0 ), pThreadDestroyed ( 0 ),
+     begin ( false ), cancel ( false ), terminated ( false )
+ {
+     this->id = epicsThreadCreate ( 
+@@ -303,7 +304,7 @@
+     if ( level > 0u ) {
+         epicsThreadShow ( this->id, level - 1 );
+         if ( level > 1u ) {
+-            ::printf ( "pWaitReleaseFlag = %p\n", this->pWaitReleaseFlag );
++            ::printf ( "pThreadDestroyed = %p\n", this->pThreadDestroyed );
+             ::printf ( "begin = %c, cancel = %c, terminated = %c\n",
+                 this->begin ? 'T' : 'F',
+                 this->cancel ? 'T' : 'F',
+
+=== modified file 'src/libCom/osi/epicsThread.h'
+--- src/libCom/osi/epicsThread.h	2010-04-26 20:38:11 +0000
++++ src/libCom/osi/epicsThread.h	2016-03-16 23:15:14 +0000
+@@ -160,7 +160,7 @@
+     epicsMutex mutex;
+     epicsEvent event;
+     epicsEvent exitEvent;
+-    bool * pWaitReleaseFlag;
++    bool * pThreadDestroyed;
+     bool begin;
+     bool cancel;
+     bool terminated;
+

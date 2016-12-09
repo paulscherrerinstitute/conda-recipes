@@ -1,14 +1,22 @@
 
 package:
     name: epics-base
-    version: "3.14.12.4"
+    version: "3.14.12.5"
 
 source:
-    fn: baseR3.14.12.4.tar.gz
-    url: http://www.aps.anl.gov/epics/download/base/baseR3.14.12.4.tar.gz
+    fn: baseR3.14.12.5.tar.gz
+    url: http://www.aps.anl.gov/epics/download/base/baseR3.14.12.5.tar.gz
     patches:
         - config_site.diff [not win]
         - config_common.diff [not win]
+        - dbContextReadNotify.patch
+        - fix-1558206.patch
+        - fix-1563191.patch
+        - fix-1581212.patch
+        - gddRace.patch
+        - msvs-timespec.patch
+        - readlineExit.patch
+        - winNew.patch
 
 build:
   number: 0
@@ -17,6 +25,7 @@ requirements:
   build:
     - m2w64-make [win]
     - perl [win]
+    - patch [win]
     - readline [linux]
 
   run:
