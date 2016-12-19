@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/paulscherrerinstitute/conda-recipes.svg?branch=master)](https://travis-ci.org/paulscherrerinstitute/conda-recipes)
+
 # Overview
 This is the collection of anaconda recipes for the Paul Scherrer Institute.
 
