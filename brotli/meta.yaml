@@ -1,10 +1,17 @@
 package:
     name: brotli
     version: 0.3.0
+
 source:
     # path: ..
     git_rev: v0.3.0
     git_url: https://github.com/google/brotli.git
+
+requirements:
+    build:
+        - python
+    run:
+        - python
 
 about:
     home: https://github.com/google/brotli
