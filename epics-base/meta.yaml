@@ -11,7 +11,7 @@ source:
         - config_common.diff [not win]
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
