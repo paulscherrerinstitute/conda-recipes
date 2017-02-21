@@ -19,6 +19,8 @@ matrix:
       env: CONDA_PY=3.5
 
 install:
+  # Expand CONDA_CMD and ANACONDA_CMD alias
+  - shopt -s expand_aliases
   # Set the anaconda environment
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       if [[ "$CONDA_PY" == "2.7" ]]; then
