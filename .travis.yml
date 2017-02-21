@@ -1,4 +1,7 @@
-sudo: false
+sudo: required
+
+service:
+    - docker
 
 language: cpp
 
@@ -20,35 +23,35 @@ install:
         curl https://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh -o miniconda.sh;
       else
         curl https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -o miniconda.sh;
-      fi
+      fi;
+      bash miniconda.sh -b -p $HOME/miniconda;
+      export PATH="$HOME/miniconda/bin:$PATH";
+      alias CONDA_CMD=conda;
+      alias ANACONDA_CMD=anaconda;
     else
-      if [[ "$CONDA_PY" == "2.7" ]]; then
-        wget https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh;
-      else
-        wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-      fi
+      mkdir -m 777 -p ${HOME}/miniconda/conda-bld;
+      ./start_docker.sh ${HOME}/miniconda/conda-bld;
+      alias CONDA_CMD="./conda_in_docker.sh";
+      alias ANACONDA_CMD="docker exec psi_conda anaconda";
     fi
-  - bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - hash -r
-  - conda config --set always_yes yes --set changeps1 no
-  - conda update -q --all
-  - conda config --add channels defaults
-  - conda install conda-build numpy anaconda-client
+  - CONDA_CMD config --set always_yes yes --set changeps1 no
+  - CONDA_CMD update -q --all
+  - CONDA_CMD config --add channels defaults
+  - CONDA_CMD install conda-build numpy anaconda-client
   # build
-  - conda build -c $CONDA_CHANNEL --skip-existing brotli
-  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || conda build -c $CONDA_CHANNEL --skip-existing readline'
-  - conda build -c $CONDA_CHANNEL --skip-existing epics-base
-  - conda build -c $CONDA_CHANNEL --skip-existing pyepics
-  - conda build -c $CONDA_CHANNEL --skip-existing h5py
-  - conda build -c $CONDA_CHANNEL --skip-existing lzf
-  - conda build -c $CONDA_CHANNEL --skip-existing bottle
-  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || conda build -c $CONDA_CHANNEL --skip-existing zeromq'
-  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || conda build -c $CONDA_CHANNEL --skip-existing cx_oracle'
+  - CONDA_CMD build -c $CONDA_CHANNEL --skip-existing brotli
+  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --skip-existing readline'
+  - CONDA_CMD build -c $CONDA_CHANNEL --skip-existing epics-base
+  - CONDA_CMD build -c $CONDA_CHANNEL --skip-existing pyepics
+  - CONDA_CMD build -c $CONDA_CHANNEL --skip-existing h5py
+  - CONDA_CMD build -c $CONDA_CHANNEL --skip-existing lzf
+  - CONDA_CMD build -c $CONDA_CHANNEL --skip-existing bottle
+  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --skip-existing zeromq'
+  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --skip-existing cx_oracle'
 
 script:
   - echo "No test scripts to be run!"
 
 deploy:
   provider: script
-  script: find $HOME/miniconda/conda-bld/${TRAVIS_OS_NAME}-64 -name "*.tar.bz2" -exec anaconda -t $CONDA_TOKEN upload {} \;
+  script: find $HOME/miniconda/conda-bld/${TRAVIS_OS_NAME}-64 -name "*.tar.bz2" -exec ANACONDA_CMD -t $CONDA_TOKEN upload {} \;
