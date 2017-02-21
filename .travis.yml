@@ -21,6 +21,8 @@ matrix:
 install:
   # Expand CONDA_CMD and ANACONDA_CMD alias
   - shopt -s expand_aliases
+  # empty if glob matches no files
+  - shopt -s nullglob
   # Set the anaconda environment
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       if [[ "$CONDA_PY" == "2.7" ]]; then
@@ -58,4 +60,4 @@ script:
 
 deploy:
   provider: script
-  script: find $HOME/miniconda/conda-bld/${TRAVIS_OS_NAME}-64 -name "*.tar.bz2" -exec ANACONDA_CMD -t $CONDA_TOKEN upload {} \;
+  script: for fname in $HOME/miniconda/conda-bld/${TRAVIS_OS_NAME}-64/*.tar.bz2; do ANACONDA_CMD -t $CONDA_TOKEN upload ${fname}; done
