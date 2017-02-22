@@ -37,7 +37,7 @@ install:
       mkdir -m 777 -p ${HOME}/miniconda/conda-bld;
       ./start_docker.sh ${HOME}/miniconda/conda-bld;
       alias CONDA_CMD="./conda_in_docker.sh";
-      export DOCKER_PREFIX="docker exec psi_conda"
+      export DOCKER_PREFIX="docker exec psi_conda";
     fi
   - CONDA_CMD config --set always_yes yes --set changeps1 no
   - CONDA_CMD update -q --all
