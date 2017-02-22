@@ -59,4 +59,8 @@ script:
 
 deploy:
   provider: script
-  script: for fname in $HOME/miniconda/conda-bld/${TRAVIS_OS_NAME}-64/*.tar.bz2; do ${DOCKER_PREFIX} anaconda -t $CONDA_TOKEN upload ${fname}; done
+  script:
+    - ls $HOME/miniconda/conda-bld/${TRAVIS_OS_NAME}-64/
+    - for fname in $HOME/miniconda/conda-bld/${TRAVIS_OS_NAME}-64/*.tar.bz2; do
+        ${DOCKER_PREFIX} anaconda -t $CONDA_TOKEN upload ${fname};
+      done
