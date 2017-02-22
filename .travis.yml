@@ -21,8 +21,6 @@ matrix:
 install:
   # Expand CONDA_CMD alias
   - shopt -s expand_aliases
-  # empty if glob matches no files
-  - shopt -s nullglob
   # Set the anaconda environment
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       if [[ "$CONDA_PY" == "2.7" ]]; then
@@ -37,30 +35,23 @@ install:
       mkdir -m 777 -p ${HOME}/miniconda/conda-bld;
       ./start_docker.sh ${HOME}/miniconda/conda-bld;
       alias CONDA_CMD="./conda_in_docker.sh";
-      export DOCKER_PREFIX="docker exec psi_conda";
     fi
   - CONDA_CMD config --set always_yes yes --set changeps1 no
+  - CONDA_CMD config --set anaconda_upload yes
   - CONDA_CMD update -q --all
   - CONDA_CMD config --add channels defaults
   - CONDA_CMD install conda-build numpy anaconda-client
   # build
-  - CONDA_CMD build -c $CONDA_CHANNEL --skip-existing brotli
-  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --skip-existing readline'
-  - CONDA_CMD build -c $CONDA_CHANNEL --skip-existing epics-base
-  - CONDA_CMD build -c $CONDA_CHANNEL --skip-existing pyepics
-  - CONDA_CMD build -c $CONDA_CHANNEL --skip-existing h5py
-  - CONDA_CMD build -c $CONDA_CHANNEL --skip-existing lzf
-  - CONDA_CMD build -c $CONDA_CHANNEL --skip-existing bottle
-  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --skip-existing zeromq'
-  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --skip-existing cx_oracle'
+  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing brotli
+  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing readline'
+  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing epics-base
+  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing pyepics
+  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing h5py
+  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing lzf
+  - CONDA_CMD build -c $CONDA_CHANNEL ---token $CONDA_TOKEN -skip-existing bottle
+  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing zeromq'
+  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing cx_oracle'
 
 script:
   - echo "No test scripts to be run!"
 
-deploy:
-  provider: script
-  script:
-    - ls $HOME/miniconda/conda-bld/${TRAVIS_OS_NAME}-64/
-    - for fname in $HOME/miniconda/conda-bld/${TRAVIS_OS_NAME}-64/*.tar.bz2; do
-        ${DOCKER_PREFIX} anaconda -t $CONDA_TOKEN upload ${fname};
-      done
