@@ -19,7 +19,7 @@ matrix:
       env: CONDA_PY=3.5
 
 install:
-  # Expand CONDA_CMD and ANACONDA_CMD alias
+  # Expand CONDA_CMD alias
   - shopt -s expand_aliases
   # empty if glob matches no files
   - shopt -s nullglob
@@ -33,12 +33,11 @@ install:
       bash miniconda.sh -b -p $HOME/miniconda;
       export PATH="$HOME/miniconda/bin:$PATH";
       alias CONDA_CMD=conda;
-      alias ANACONDA_CMD=anaconda;
     else
       mkdir -m 777 -p ${HOME}/miniconda/conda-bld;
       ./start_docker.sh ${HOME}/miniconda/conda-bld;
       alias CONDA_CMD="./conda_in_docker.sh";
-      alias ANACONDA_CMD="docker exec psi_conda anaconda";
+      export DOCKER_PREFIX="docker exec psi_conda"
     fi
   - CONDA_CMD config --set always_yes yes --set changeps1 no
   - CONDA_CMD update -q --all
@@ -60,4 +59,4 @@ script:
 
 deploy:
   provider: script
-  script: for fname in $HOME/miniconda/conda-bld/${TRAVIS_OS_NAME}-64/*.tar.bz2; do ANACONDA_CMD -t $CONDA_TOKEN upload ${fname}; done
+  script: for fname in $HOME/miniconda/conda-bld/${TRAVIS_OS_NAME}-64/*.tar.bz2; do ${DOCKER_PREFIX} anaconda -t $CONDA_TOKEN upload ${fname}; done
