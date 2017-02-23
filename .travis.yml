@@ -37,7 +37,10 @@ install:
       alias CONDA_CMD="./conda_in_docker.sh";
     fi
   - CONDA_CMD config --set always_yes yes --set changeps1 no
-  - CONDA_CMD config --set anaconda_upload yes
+  - '[[ -z "$CONDA_TOKEN" ]] || CONDA_CMD config --set anaconda_upload yes'
+  - if [[ -z "$CONDA_TOKEN" ]]; then
+      export CONDA_TOKEN=token_placeholder;
+    fi
   - CONDA_CMD update -q --all
   - CONDA_CMD config --add channels defaults
   - CONDA_CMD install conda-build numpy anaconda-client
