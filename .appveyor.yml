@@ -34,4 +34,4 @@ install:
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing pyepics"
 
 on_success:
-  - anaconda -t %CONDA_TOKEN% upload %MINICONDA%\\conda-bld\\win-%PYTHON_ARCH%\\*.tar.bz2
+  - if defined CONDA_TOKEN (anaconda -t %CONDA_TOKEN% upload %MINICONDA%\\conda-bld\\win-%PYTHON_ARCH%\\*.tar.bz2)
