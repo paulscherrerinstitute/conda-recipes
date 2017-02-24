@@ -25,6 +25,7 @@ install:
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q --all
+  - conda config --add channels defaults
   - conda install conda-build numpy anaconda-client
   # build
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing brotli"
@@ -33,4 +34,4 @@ install:
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing pyepics"
 
 on_success:
-  - anaconda -t %CONDA_TOKEN% upload %MINICONDA%\\conda-bld\\win-%PYTHON_ARCH%\\*.tar.bz2
+  - if defined CONDA_TOKEN (anaconda -t %CONDA_TOKEN% upload %MINICONDA%\\conda-bld\\win-%PYTHON_ARCH%\\*.tar.bz2)

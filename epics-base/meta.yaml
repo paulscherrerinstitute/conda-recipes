@@ -9,6 +9,7 @@ source:
     patches:
         - config_site.diff [not win]
         - config_common.diff [not win]
+        - config_readline.diff [linux]
 
 build:
   number: 1
@@ -18,10 +19,6 @@ requirements:
     - m2w64-make [win]
     - perl [win]
     - patch [win]
-    - readline [linux]
-
-  run:
-    - readline [linux]
 
 about:
     home: http://www.aps.anl.gov/epics
