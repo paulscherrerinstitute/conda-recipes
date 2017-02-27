@@ -10,9 +10,10 @@ source:
         - config_site.diff [not win]
         - config_common.diff [not win]
         - config_readline.diff [linux]
+        - bind-returns-eacces.patch
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
