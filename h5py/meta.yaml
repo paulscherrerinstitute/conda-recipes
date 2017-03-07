@@ -11,7 +11,7 @@ requirements:
   build:
     - python
     - numpy
-    - hdf5
+    - hdf5 ==1.8.17
     - cython
     - six
     - pkgconfig
