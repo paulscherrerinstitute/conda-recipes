@@ -1,5 +1,11 @@
 # Overview
-pyepics can be easily used to access Channel Access channels from Python.
+
+Pyepics (https://github.com/pyepics/) package including proper dependencies (i.e. to epics base)
+
+
+# Usage
+
+Simple example for accessing channels from a Channel Access gateway:
 
 ```python
 # Set appropriate environment variables
