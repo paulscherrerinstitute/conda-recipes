@@ -18,6 +18,14 @@ environment:
     - PYTHON_VERSION: 3.5
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda35-x64
+    - PYTHON_VERSION: 3.6
+      PYTHON_ARCH: "32"
+      MINICONDA: C:\Miniconda36
+      EPICS_HOST_ARCH: "win32-x86"
+    - PYTHON_VERSION: 3.6
+      PYTHON_ARCH: "64"
+      MINICONDA: C:\Miniconda36-x64
+      EPICS_HOST_ARCH: "windows-x64"
 
 build: false
 
