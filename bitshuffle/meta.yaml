@@ -20,6 +20,7 @@ requirements:
         - h5py >=2.7.*
         - hdf5 ==1.8.17
     run:
+        - python 
         - numpy
         - h5py
         - cython
