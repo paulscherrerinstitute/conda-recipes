@@ -11,9 +11,10 @@ source:
         - config_common.diff [not win]
         - config_readline.diff [linux]
         - bind-returns-eacces.patch
+        - pcas-read-gdd.patch
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
