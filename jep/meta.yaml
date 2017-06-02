@@ -1,11 +1,12 @@
 package:
   name: jep
-  version: "3.6.3"
+  version: "3.6.3.1"
 
 source:
-  fn: jep-3.6.3.tar.gz
-  url: https://pypi.python.org/packages/58/22/e32f3ef22fc9fc9df43b0b8b16fd4c7ea78e60ece48447fd0efce4064290/jep-3.6.3.tar.gz
-  md5: 824a7e79adb2888ed2b175514a8db340
+  path: ../../jep
+  #fn: jep-3.6.3.tar.gz
+  #url: https://pypi.python.org/packages/58/22/e32f3ef22fc9fc9df43b0b8b16fd4c7ea78e60ece48447fd0efce4064290/jep-3.6.3.tar.gz
+  #md5: 824a7e79adb2888ed2b175514a8db340
 #  patches:
    # List any patch files here
    # - fix.patch
@@ -52,9 +53,6 @@ test:
 
 about:
   home: https://github.com/mrj0/jep
-  license: zlib/libpng License
-  summary: 'Jep embeds CPython in Java'
-  license_family: OTHER
 
 # See
 # http://docs.continuum.io/conda/build.html for
