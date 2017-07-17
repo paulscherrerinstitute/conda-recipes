@@ -1,0 +1,71 @@
+package:
+  name: xrayutilities
+  version: "1.4.1"
+
+source:
+  fn: xrayutilities-1.4.1.tar.gz
+  url: https://pypi.python.org/packages/a7/fc/f1baac69c47f53b48b522e685af7bc8c0150e4911e885773f47b74d103c0/xrayutilities-1.4.1.tar.gz
+  md5: 8e8a52f750afc9584e5b113277d8436a
+#  patches:
+   # List any patch files here
+   # - fix.patch
+
+# build:
+  # noarch_python: True
+  # preserve_egg_dir: True
+  # entry_points:
+    # Put any entry points (scripts to be generated automatically) here. The
+    # syntax is module:function.  For example
+    #
+    # - xrayutilities = xrayutilities:main
+    #
+    # Would create an entry point called xrayutilities that calls xrayutilities.main()
+
+
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  # number: 1
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - numpy
+
+  run:
+    - python
+    - numpy
+    - scipy
+    - h5py
+
+test:
+  # Python imports
+  imports:
+    - xrayutilities
+    - xrayutilities.analysis
+    - xrayutilities.io
+    - xrayutilities.materials
+    - xrayutilities.math
+    - xrayutilities.simpack
+
+  # commands:
+    # You can put test commands to be run here.  Use this to test that the
+    # entry points work.
+
+
+  # You can also put a file called run_test.py in the recipe that will be run
+  # at test time.
+
+  # requires:
+    # Put any additional test requirements here.  For example
+    # - nose
+
+about:
+  home: http://xrayutilities.sourceforge.net
+  license: GNU General Public License v2 or later (GPLv2+)
+  summary: 'package for x-ray diffraction data evaluation'
+  license_family: GPL2
+
+# See
+# http://docs.continuum.io/conda/build.html for
+# more information about meta.yaml
