@@ -48,16 +48,16 @@ install:
     fi
   - CONDA_CMD update -q --all
   - CONDA_CMD config --add channels defaults
+  - CONDA_CMD config --add channels conda-forge
   - CONDA_CMD install conda-build numpy anaconda-client
   # build
   - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing brotli
   - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing readline'
   - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing epics-base
   - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing pyepics
-  #- CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing h5py
+  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing h5py
   - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing lzf
   - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing bottle
-  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing xrayutilities
   #- CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing bitshuffle
   - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing zeromq'
   - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing cx_oracle'
