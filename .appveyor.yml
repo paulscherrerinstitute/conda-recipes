@@ -34,13 +34,13 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q --all
   - conda config --add channels defaults
+  - conda config --add channels conda-forge
   - conda install conda-build numpy anaconda-client
   # build
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing brotli"
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing bottle"
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing epics-base"
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing pyepics"
-  - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing xrayutilities"
 
 on_success:
   - if defined CONDA_TOKEN (anaconda -t %CONDA_TOKEN% upload %MINICONDA%\\conda-bld\\win-%PYTHON_ARCH%\\*.tar.bz2)
