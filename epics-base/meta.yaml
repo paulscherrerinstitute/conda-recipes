@@ -19,7 +19,7 @@ build:
 requirements:
   build:
     - m2w64-make [win]
-    - perl
+    - perl [win]
     - patch [win]
 
 about:
