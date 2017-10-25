@@ -9,21 +9,11 @@ matrix:
   include:
     - os: linux
       dist: trusty
-      env: CONDA_PY=2.7
-    - os: linux
-      dist: trusty
-      env: CONDA_PY=3.5
-    - os: linux
-      dist: trusty
-      env: CONDA_PY=3.6
     - os: osx
-      env: CONDA_PY=2.7
-    - os: osx
-      env: CONDA_PY=3.5
-    - os: osx
-      env: CONDA_PY=3.6
 
 install:
+  # Variant config file
+  - cp conda_build_config.yaml $HOME
   # Expand CONDA_CMD alias
   - shopt -s expand_aliases
   # Set the anaconda environment
