@@ -46,8 +46,8 @@ install:
   - if [[ -z "$CONDA_TOKEN" ]]; then
       export CONDA_TOKEN=token_placeholder;
     fi
-  - CONDA_CMD update -q --all
   - CONDA_CMD config --add channels defaults
+  - CONDA_CMD update -q --all
   - CONDA_CMD install conda-build numpy anaconda-client
   # build
   - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing brotli
