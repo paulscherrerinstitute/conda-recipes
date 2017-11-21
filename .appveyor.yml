@@ -24,6 +24,10 @@ install:
   - conda update -q --all
   - conda config --add channels defaults
   - conda install conda-build numpy anaconda-client
+  # replace patch with m2-patch
+  # https://github.com/conda/conda-build/issues/2307
+  - conda remove patch
+  - conda install m2-patch
   # build
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing brotli"
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing bottle"
