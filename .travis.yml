@@ -51,6 +51,7 @@ install:
   #- CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing bitshuffle
   - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing zeromq'
   - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing cx_oracle'
+  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing tinydb
 
 script:
   - echo "No test scripts to be run!"
