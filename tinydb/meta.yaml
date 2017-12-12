@@ -1,0 +1,39 @@
+{% set name = "tinydb" %}
+{% set version = "3.7.0" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "071105c339b44f928968cb4e62f7340a568beb9962a3dcda66eb82da9cab0b0a" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install  --single-version-externally-managed --record=record.txt
+
+requirements:
+  build:
+    - python
+    - setuptools
+  run:
+    - python
+
+test:
+  imports:
+    - tests
+    - tinydb
+
+about:
+  home: https://github.com/msiemens/tinydb
+  license: MIT License
+  license_family: MIT
+  summary: TinyDB is a tiny, document oriented database optimized for your happiness :)
+  doc_url: 'http://tinydb.readthedocs.io'
+
+extra:
+  recipe-maintainers: ''
