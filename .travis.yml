@@ -9,6 +9,7 @@ matrix:
   include:
     - os: linux
       dist: trusty
+      group: deprecated-2017Q4
     - os: osx
 
 install:
