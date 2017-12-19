@@ -29,8 +29,7 @@ install:
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing brotli"
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing bottle"
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% -c conda-forge --skip-existing epics-base"
-  - conda search pyparsing
-    #- "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing pyepics"
+  - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing pyepics"
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing tinydb"
 
 on_success:
