@@ -6,7 +6,7 @@ package:
 
 source:
     fn: baseR{{version}}.tar.gz
-    url: http://www.aps.anl.gov/epics/download/base/baseR{{version}}.tar.gz
+    url: https://epics.anl.gov/download/base/baseR{{version}}.tar.gz
     patches:
         - config_site.diff # [not win]
         - config_common.diff # [not win]
