@@ -38,6 +38,8 @@ install:
     fi
   - CONDA_CMD config --add channels defaults
   - CONDA_CMD update -q --all
+  # avoid downloading MKL of huge size
+  - CONDA_CMD install nomkl
   - CONDA_CMD install conda-build numpy anaconda-client
   # build
   - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing brotli
@@ -51,6 +53,7 @@ install:
   #- CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing bitshuffle
   - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing zeromq'
   - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing cx_oracle'
+  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing tinydb
 
 script:
   - echo "No test scripts to be run!"
