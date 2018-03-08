@@ -10,6 +10,7 @@ source:
     patches:
         - config_site.diff # [not win]
         - config_common.diff # [not win]
+        - rules_build.diff
         - config_readline.diff # [linux]
 
 build:
