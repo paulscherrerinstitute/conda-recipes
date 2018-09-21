@@ -27,6 +27,6 @@ requirements:
     - patch # [win]
 
 about:
-    home: http://www.aps.anl.gov/epics
+    home: https://epics.anl.gov/
     license: Epics Open License
     summary: EPICS Base Library
