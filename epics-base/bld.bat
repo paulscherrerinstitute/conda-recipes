@@ -9,7 +9,7 @@ set SCRIPTS=
 
 REM set up build
 copy %RECIPE_DIR%\pre-build.py %SRC_DIR%
-%SYS_PATH% pre-build.py
+%PYTHON% pre-build.py
 
 echo Building at %CD%
 mingw32-make clean
