@@ -4,7 +4,7 @@ install -d $PREFIX/lib
 install -d $PREFIX/epics
 
 # export EPICS_HOST_ARCH as determined
-EPICS_HOST_ARCH=$(startup/EpicsHostArch)
+EPICS_HOST_ARCH=$(perl src/tools/EpicsHostArch.pl)
 export EPICS_HOST_ARCH
 
 # EPICS assumes gcc suit has /usr/bin prefix.
