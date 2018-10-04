@@ -1,9 +1,9 @@
 package:
     name: bitshuffle
-    version: 0.2.4.1
+    version: 0.3.4
 source:
     git_url: https://github.com/kiyo-masui/bitshuffle.git
-    git_rev: 0.2.4
+    git_rev: 0.3.4
 
     patches:
       - setup.py.patch
