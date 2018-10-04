@@ -6,7 +6,7 @@
  # TODO, figure out what the canonacal way to do this should be.
 -INCLUDE_DIRS = []
 -LIBRARY_DIRS = []
-+INCLUDE_DIRS = [os.environ['CONDA_HOME'] + '/include']
++INCLUDE_DIRS = [os.environ['CONDA_HOME'] + '/include', os.getcwd()]
 +LIBRARY_DIRS = [os.environ['CONDA_HOME'] + '/lib']
  if sys.platform == 'darwin':
      # putting here both macports and homebrew paths will generate
