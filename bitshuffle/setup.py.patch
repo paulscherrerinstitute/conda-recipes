@@ -1,22 +1,17 @@
 --- a/setup.py
 +++ b/setup.py
-@@ -44,8 +44,8 @@ H5PLUGINS_DEFAULT = '/usr/local/hdf5/lib/plugin'
- 
- # Copied from h5py.
- # TODO, figure out what the canonacal way to do this should be.
--INCLUDE_DIRS = []
--LIBRARY_DIRS = []
-+INCLUDE_DIRS = [os.environ['CONDA_HOME'] + '/include', os.getcwd()]
-+LIBRARY_DIRS = [os.environ['CONDA_HOME'] + '/lib']
- if sys.platform == 'darwin':
-     # putting here both macports and homebrew paths will generate
-     # "ld: warning: dir not found" at the linking phase
-@@ -62,7 +62,7 @@ elif sys.platform.startswith('freebsd'):
+@@ -43,11 +43,11 @@ H5PLUGINS_DEFAULT = '/usr/local/hdf5/lib/plugin'
  if sys.platform == 'darwin':
      OMP_DEFAULT = False
  else:
 -    OMP_DEFAULT = True
 +    OMP_DEFAULT = False
- 
- INCLUDE_DIRS = [d for d in INCLUDE_DIRS if path.isdir(d)]
- LIBRARY_DIRS = [d for d in LIBRARY_DIRS if path.isdir(d)]
+
+ FALLBACK_CONFIG = {
+-    'include_dirs': [],
+-    'library_dirs': [],
++    'include_dirs': [os.environ['CONDA_HOME'] + '/include'],
++    'library_dirs': [os.environ['CONDA_HOME'] + '/lib'],
+     'libraries': [],
+     'extra_compile_args': [],
+     'extra_link_args': [],
