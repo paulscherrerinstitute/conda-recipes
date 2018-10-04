@@ -11,10 +11,10 @@ environment:
   matrix:
     - PYTHON_VERSION: 3.5
       PYTHON_ARCH: "32"
-      MINICONDA: C:\Miniconda
+      MINICONDA: C:\Miniconda3
     - PYTHON_VERSION: 3.5
       PYTHON_ARCH: "64"
-      MINICONDA: C:\Miniconda-x64
+      MINICONDA: C:\Miniconda3-x64
 
 build: false
 
@@ -26,12 +26,12 @@ install:
   - conda install conda-build numpy anaconda-client
   - conda info
   # build
-  - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing brotli"
-  - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing bottle"
-  - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing epics-base"
-  - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing pyepics"
-  - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing tinydb"
-  - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing xrt"
+  #- "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing brotli"
+  #- "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing bottle"
+  #- "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing epics-base"
+  #- "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing pyepics"
+  #- "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing tinydb"
+  #- "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing xrt"
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing bitshuffle"
 
 on_success:
