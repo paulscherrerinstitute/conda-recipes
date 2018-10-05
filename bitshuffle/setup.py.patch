@@ -15,3 +15,11 @@
      'libraries': [],
      'extra_compile_args': [],
      'extra_link_args': [],
+@@ -277,6 +277,7 @@ with open('README.rst') as r:
+     long_description = r.read()
+
+ # TODO hdf5 support should be an "extra". Figure out how to set this up.
++EXTENSIONS = []
+ setup(
+     name='bitshuffle',
+     version=VERSION,
