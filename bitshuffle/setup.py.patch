@@ -19,7 +19,7 @@
      long_description = r.read()
 
  # TODO hdf5 support should be an "extra". Figure out how to set this up.
-+EXTENSIONS = []
++EXTENSIONS = [ext_bshuf]
  setup(
      name='bitshuffle',
      version=VERSION,
