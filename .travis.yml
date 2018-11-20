@@ -55,6 +55,7 @@ install:
   - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing cx_oracle'
   - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing tinydb
   - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing xrt
+  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing phpserialize
 
 script:
   - echo "No test scripts to be run!"
