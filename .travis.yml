@@ -51,7 +51,6 @@ install:
   - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing bottle
   - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing xrayutilities
   #- CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing bitshuffle
-  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing zeromq'
   - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing cx_oracle'
   - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing tinydb
   - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing xrt
