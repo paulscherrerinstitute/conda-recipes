@@ -35,7 +35,7 @@ install:
   - conda install conda-build numpy anaconda-client
   - conda info
   # build
-  - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing brotli"
+  #- "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing brotli"
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing bottle"
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing epics-base"
   - "%CMD_IN_ENV% conda build -c %CONDA_CHANNEL% --skip-existing pyepics"
