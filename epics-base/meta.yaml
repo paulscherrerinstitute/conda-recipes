@@ -10,7 +10,7 @@ source:
     patches:
         - config_site.diff # [not win]
         - config_common.diff # [not win]
-        - rules_build.diff
+        - rules_build.diff # [not win]
         - config_readline.diff # [linux]
 
 build:
@@ -24,7 +24,6 @@ requirements:
     - python # [win]
     - m2w64-make # [win]
     - perl # [win]
-    - m2-patch # [win]
 
 about:
     home: https://epics.anl.gov/
