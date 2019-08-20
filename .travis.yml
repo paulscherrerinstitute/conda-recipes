@@ -24,7 +24,7 @@ install:
         curl https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -o miniconda.sh;
       fi;
       bash miniconda.sh -b -p $HOME/miniconda;
-      export PATH="$HOME/miniconda/bin:$PATH";
+      source $HOME/miniconda/bin/activate;
       alias CONDA_CMD=conda;
     else
       mkdir -m 777 -p ${HOME}/miniconda/conda-bld;
@@ -42,19 +42,19 @@ install:
   - CONDA_CMD install nomkl
   - CONDA_CMD install conda-build numpy anaconda-client
   # build
-  #- CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing brotli
-  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing readline'
-  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing epics-base
-  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing pyepics
-  #- CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing h5py
-  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing lzf
-  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing bottle
-  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing xrayutilities
-  #- CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing bitshuffle
-  #- '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing cx_oracle'
-  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing tinydb
-  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing xrt
-  - CONDA_CMD build -c $CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing phpserialize
+  #- CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing brotli
+  #- '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing readline'
+  - CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing epics-base
+  - CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing pyepics
+  #- CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing h5py
+  - CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing lzf
+  - CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing bottle
+  - CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing xrayutilities
+  #- CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing bitshuffle
+  #- '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing cx_oracle'
+  - CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing tinydb
+  - CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing xrt
+  - CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing phpserialize
 
 script:
   - echo "No test scripts to be run!"
