@@ -21,7 +21,7 @@ build: false
 install:
   - "%MINICONDA%\\Scripts\\activate.bat"
   - conda config --set always_yes yes --set changeps1 no
-  - if defined CONDA_TOKEN (config --set anaconda_upload yes) else (set CONDA_TOKEN=token_placeholder)
+  - if defined CONDA_TOKEN (conda config --set anaconda_upload yes) else (set CONDA_TOKEN=token_placeholder)
   - conda config --add channels defaults
   - conda update -q --all
   - conda install conda-build numpy anaconda-client
