@@ -1,7 +1,7 @@
 {% set name = "tinydb" %}
-{% set version = "3.7.0" %}
+{% set version = "3.13.0" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "071105c339b44f928968cb4e62f7340a568beb9962a3dcda66eb82da9cab0b0a" %}
+{% set hash_value = "a05c4c81e6e867c4f8a2e51c5236d0d897019aa5e9296f5947455b0bdd3c519d" %}
 
 package:
   name: '{{ name|lower }}'
@@ -13,6 +13,7 @@ source:
   '{{ hash_type }}': '{{ hash_value }}'
 
 build:
+  noarch: python
   number: 0
   script: python setup.py install  --single-version-externally-managed --record=record.txt
 
@@ -25,7 +26,6 @@ requirements:
 
 test:
   imports:
-    - tests
     - tinydb
 
 about:
