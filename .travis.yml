@@ -41,6 +41,7 @@ install:
   # avoid downloading MKL of huge size
   - CONDA_CMD install nomkl
   - CONDA_CMD install conda-build numpy anaconda-client
+  - CONDA_CMD info
   # build
   #- CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing brotli
   #- '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing readline'
