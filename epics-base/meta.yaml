@@ -24,7 +24,7 @@ requirements:
     - python # [win]
     - m2w64-make # [win]
     - perl # [win]
-    - patch # [win]
+    - m2-patch # [win]
 
 about:
     home: https://epics.anl.gov/
