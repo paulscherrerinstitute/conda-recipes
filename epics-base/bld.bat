@@ -13,5 +13,5 @@ python pre-build.py
 
 echo Building at %CD%
 mingw32-make clean
-mingw32-make
+mingw32-make CROSS_COMPILER_TARGET_ARCHS=%EPICS_HOST_ARCH%-static
 
