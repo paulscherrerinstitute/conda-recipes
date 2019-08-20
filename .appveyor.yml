@@ -31,7 +31,7 @@ install:
   - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --skip-existing epics-base"
   - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --skip-existing pyepics"
   #- "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --skip-existing tinydb"
-  #- "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --skip-existing xrt"
+  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --skip-existing xrt"
   - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --skip-existing bitshuffle"
 
 on_success:

@@ -53,7 +53,7 @@ install:
   #- CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing bitshuffle
   #- '[[ "$TRAVIS_OS_NAME" != "linux" ]] || CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing cx_oracle'
   - CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing tinydb
-  - CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing xrt
+  #- CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing xrt
   - CONDA_CMD build -c $MY_CONDA_CHANNEL --token $CONDA_TOKEN --skip-existing phpserialize
 
 script:
