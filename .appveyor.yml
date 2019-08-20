@@ -9,26 +9,17 @@ environment:
     CMD_IN_ENV: "cmd /E:ON /V:ON /C run_with_env.cmd"
 
   matrix:
-    - PYTHON_VERSION: 3.5
+    - PYTHON_VERSION: 3
       PYTHON_ARCH: "32"
       MINICONDA: C:\Miniconda3
-    - PYTHON_VERSION: 3.5
-      PYTHON_ARCH: "64"
-      MINICONDA: C:\Miniconda3-x64
-    - PYTHON_VERSION: 3.6
-      PYTHON_ARCH: "32"
-      MINICONDA: C:\Miniconda3
-    - PYTHON_VERSION: 3.6
-      PYTHON_ARCH: "64"
-      MINICONDA: C:\Miniconda3-x64
-    - PYTHON_VERSION: 3.7
+    - PYTHON_VERSION: 3
       PYTHON_ARCH: "64"
       MINICONDA: C:\Miniconda3-x64
 
 build: false
 
 install:
-  - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+  - "%MINICONDA%\\Scripts\\activate.bat"
   - conda config --set always_yes yes --set changeps1 no
   - conda config --add channels defaults
   - conda update -q --all
