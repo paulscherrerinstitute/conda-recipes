@@ -21,18 +21,19 @@ build: false
 install:
   - "%MINICONDA%\\Scripts\\activate.bat"
   - conda config --set always_yes yes --set changeps1 no
+  - if defined CONDA_TOKEN (config --set anaconda_upload yes) else (set CONDA_TOKEN=token_placeholder)
   - conda config --add channels defaults
   - conda update -q --all
   - conda install conda-build numpy anaconda-client
   - conda info
   # build
-  #- "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --skip-existing brotli"
-  #- "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --skip-existing bottle"
-  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --skip-existing epics-base"
-  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --skip-existing pyepics"
-  #- "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --skip-existing tinydb"
-  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --skip-existing xrt"
-  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --skip-existing bitshuffle"
+  #- "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing brotli"
+  #- "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing bottle"
+  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing epics-base"
+  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing pyepics"
+  #- "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing tinydb"
+  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing xrt"
+  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing bitshuffle"
 
 on_success:
-  - if defined CONDA_TOKEN (anaconda -t %CONDA_TOKEN% upload %MINICONDA%\\conda-bld\\win-%PYTHON_ARCH%\\*.tar.bz2)
+  - echo "Finished building"
