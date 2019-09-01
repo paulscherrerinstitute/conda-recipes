@@ -14,14 +14,14 @@ source:
         - config_readline.diff # [linux]
 
 build:
-  number: 1
-  features:
-    - vc9  # [win and py27]
-    - vc14 # [win and (py35 or py36)]
+  number: 2
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - python # [win]
+    - make # [not win]
     - m2w64-make # [win]
     - perl # [win]
 
