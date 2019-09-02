@@ -26,6 +26,9 @@ install:
   - conda update -q --all
   - conda install conda-build numpy anaconda-client
   - conda info
+  # patch vs2008 express
+  - conda install -c conda-forge vs2008_express_vc_python_patch
+  - setup_x64
   # build
   - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing epics-base"
   - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing pyepics"
