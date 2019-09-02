@@ -7,6 +7,9 @@ if %ARCH%==32 (
 REM SCRIPTS causes failure of GNU make
 set SCRIPTS=
 
+REM show path for debug
+set PATH
+
 REM set up build
 copy %RECIPE_DIR%\pre-build.py %SRC_DIR%
 python pre-build.py

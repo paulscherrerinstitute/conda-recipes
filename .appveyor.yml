@@ -27,10 +27,10 @@ install:
   - conda install conda-build numpy anaconda-client
   - conda info
   # build
-  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing epics-base
-  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing pyepics
-  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing xrt
-  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing bitshuffle
+  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing epics-base"
+  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing pyepics"
+  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing xrt"
+  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing bitshuffle"
 
 on_success:
   - echo "Finished building"
