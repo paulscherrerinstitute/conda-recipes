@@ -2,12 +2,6 @@ init:
   - git config --global core.autocrlf false
 
 environment:
-  global:
-    # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
-    # /E:ON and /V:ON options are not enabled in the batch script intepreter
-    # See: http://stackoverflow.com/a/13751649/163740
-    CMD_IN_ENV: "cmd /E:ON /V:ON /C run_with_env.cmd"
-
   matrix:
     - PYTHON_VERSION: 3
       PYTHON_ARCH: "32"
@@ -30,10 +24,10 @@ install:
   - conda install -c conda-forge vs2008_express_vc_python_patch
   - setup_x64
   # build
-  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing epics-base"
-  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing pyepics"
-  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing xrt"
-  - "%CMD_IN_ENV% conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing bitshuffle"
+  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing epics-base
+  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing pyepics
+  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing xrt
+  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing bitshuffle
 
 on_success:
   - echo "Finished building"
