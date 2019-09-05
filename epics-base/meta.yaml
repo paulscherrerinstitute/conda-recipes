@@ -14,7 +14,7 @@ source:
         - config_readline.diff # [linux]
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   build:
