@@ -1,29 +1,28 @@
 package:
     name: bitshuffle
-    version: 0.3.4
+    version: 0.3.6.1
 source:
-    git_url: https://github.com/kiyo-masui/bitshuffle.git
-    git_rev: 0.3.4
-
-    patches:
-      - setup.py.patch
-
-build:
-    number: 1
+   git_url: https://github.com/kiyo-masui/bitshuffle.git
+   # Commit Oct 16, 2019
+   git_rev: cc6c11216b88863f5c1958ebfd99175eea82bac7
+    # path: ..
+   patches:
+     - setup.py.patch
 
 requirements:
+    host:
+        - python
+        - numpy >=1.11
+        - cython
+        - h5py
+    run:
+        - python
     build:
         - python
+        - {{ compiler('cxx') }}
         - setuptools
-        - cython
-        - numpy
-        - h5py
-        - hdf5
-    run:
-        - python 
-        - numpy
-        - h5py
-        - cython
+        - git
+        - patch
 
 about:
     home: https://github.com/kiyo-masui/bitshuffle/blob/master/setup.py
