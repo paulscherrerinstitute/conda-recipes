@@ -22,7 +22,7 @@ requirements:
         - {{ compiler('cxx') }}
         - setuptools
         - git
-        - patch
+        - m2-patch # [ win ]
 
 about:
     home: https://github.com/kiyo-masui/bitshuffle/blob/master/setup.py

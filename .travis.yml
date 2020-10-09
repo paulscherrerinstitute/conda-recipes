@@ -18,11 +18,7 @@ install:
   - shopt -s expand_aliases
   # Set the anaconda environment
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      if [[ "$CONDA_PY" == "2.7" ]]; then
-        curl https://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh -o miniconda.sh;
-      else
-        curl https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -o miniconda.sh;
-      fi;
+      curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -o miniconda.sh;
       bash miniconda.sh -b -p $HOME/miniconda;
       source $HOME/miniconda/bin/activate;
       alias CONDA_CMD=conda;
