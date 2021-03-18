@@ -1,6 +1,6 @@
 package:
     name: bitshuffle
-    version: 0.3.6.1
+    version: 0.3.6.2
 source:
    git_url: https://github.com/kiyo-masui/bitshuffle.git
    # Commit Oct 16, 2019
