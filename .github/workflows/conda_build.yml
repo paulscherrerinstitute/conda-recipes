@@ -53,15 +53,15 @@ jobs:
             MY_CONDA_CMD: "./conda_in_docker.sh"
       - name: Build macOS
         run: |
-            '[[ -z "$MY_CONDA_TOKEN" ]] || ${MY_CONDA_CMD} config --set anaconda_upload yes'
-            '[[ -n "$MY_CONDA_TOKEN" ]] || MY_CONDA_TOKEN=placeholder'
+            [[ -z "$MY_CONDA_TOKEN" ]] || ${MY_CONDA_CMD} config --set anaconda_upload yes
+            [[ -n "$MY_CONDA_TOKEN" ]] || MY_CONDA_TOKEN=placeholder
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing epics-base
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing pyepics
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing lzf
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing bottle
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing xrayutilities
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing bitshuffle
-            '[[ "$RUNNER_OS" != "linux" ]] || ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing cx_oracle'
+            [[ "$RUNNER_OS" != "linux" ]] || ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing cx_oracle
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing tinydb
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing xrt
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing phpserialize
