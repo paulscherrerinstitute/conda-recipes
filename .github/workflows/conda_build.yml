@@ -49,11 +49,10 @@ jobs:
         if: runner.os == 'Linux'
         run: |
             ./start_docker.sh $(pwd)/packages
-        env:
-            MY_CONDA_CMD: "./conda_in_docker.sh"
+            echo "MY_CONDA_CMD=./conda_in_docker.sh" >> $GITHUB_ENV
       - name: Build
         run: |
-            printenv
+            ${MY_CONDA_CMD} info
             [[ -z "$MY_CONDA_TOKEN" ]] || ${MY_CONDA_CMD} config --set anaconda_upload yes
             [[ -n "$MY_CONDA_TOKEN" ]] || MY_CONDA_TOKEN=placeholder
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing epics-base
