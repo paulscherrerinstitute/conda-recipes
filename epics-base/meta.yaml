@@ -12,6 +12,7 @@ source:
         - config_common.diff # [not win]
         - rules_build.diff # [not win]
         - config_readline.diff # [linux]
+        - cas.diff
 
 build:
   number: 3
