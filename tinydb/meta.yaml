@@ -1,7 +1,7 @@
 {% set name = "tinydb" %}
-{% set version = "3.13.0" %}
+{% set version = "3.15.2" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "a05c4c81e6e867c4f8a2e51c5236d0d897019aa5e9296f5947455b0bdd3c519d" %}
+{% set hash_value = "f273d9b6d8b1b5e1d094a6eb8b72851b39b81099293344132c73332b60e3b893" %}
 
 package:
   name: '{{ name|lower }}'
