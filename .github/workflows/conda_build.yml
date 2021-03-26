@@ -52,6 +52,7 @@ jobs:
             echo "MY_CONDA_CMD=./conda_in_docker.sh" >> $GITHUB_ENV
       - name: Build
         run: |
+            ${MY_CONDA_CMD} install anaconda-client
             ${MY_CONDA_CMD} info
             [[ -z "$MY_CONDA_TOKEN" ]] || ${MY_CONDA_CMD} config --set anaconda_upload yes
             [[ -n "$MY_CONDA_TOKEN" ]] || MY_CONDA_TOKEN=placeholder
