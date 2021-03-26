@@ -27,10 +27,12 @@ source:
   # number: 1
 
 requirements:
-  build:
-    - python
+  host:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - python {{ python }}
     - setuptools
-    - numpy
+    - numpy {{ numpy }}
 
   run:
     - python
