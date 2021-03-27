@@ -38,10 +38,12 @@ test:
     - xrt
     - xrt.backends
     - xrt.backends.raycing
-    - xrt.gui
-    - xrt.gui.commons
-    - xrt.gui.xrtGlow
-    - xrt.gui.xrtQook
+   # this could fail when system dependent libraries from pyqt
+   # are not installed, especially in a docker environment
+   #- xrt.gui
+   #- xrt.gui.commons
+   #- xrt.gui.xrtGlow
+   #- xrt.gui.xrtQook
 
 about:
   home: http://xrt.readthedocs.io
