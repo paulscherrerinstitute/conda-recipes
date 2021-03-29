@@ -73,8 +73,3 @@ jobs:
         if: runner.os == 'Linux'
         run: |
             ./stop_docker.sh
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          path: packages/*/*.tar.bz2
-          retention-days: 1
