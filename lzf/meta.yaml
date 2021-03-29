@@ -3,13 +3,15 @@ package:
     version: 0.2.4
 
 source:
-    # path: ..
-    git_rev: release-0.2.4
-    git_url: https://github.com/teepark/python-lzf.git
+    fn: python-lzf-0.2.4.tar.gz
+    url: https://pypi.io/packages/source/p/python-lzf/python-lzf-0.2.4.tar.gz
     patches:
         - hotfix_issue5.diff
 
 requirements:
+    build:
+        - m2-patch # [win]
+
     host:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
