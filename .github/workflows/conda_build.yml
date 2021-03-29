@@ -50,7 +50,7 @@ jobs:
         run: |
             ./start_docker.sh $(pwd)/packages
             echo "MY_CONDA_CMD=./conda_in_docker.sh" >> $GITHUB_ENV
-      - name: Build
+      - name: Build ${{ runner.os }} Packages
         run: |
             ${MY_CONDA_CMD} config --add channels defaults
             ${MY_CONDA_CMD} install anaconda-client
@@ -58,14 +58,17 @@ jobs:
             [[ -z "$MY_CONDA_TOKEN" ]] || ${MY_CONDA_CMD} config --set anaconda_upload yes
             [[ -n "$MY_CONDA_TOKEN" ]] || MY_CONDA_TOKEN=placeholder
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing epics-base
-            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing pyepics
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing lzf
-            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing bottle
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing xrayutilities
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing bitshuffle
+      - name: Build pure python packages
+        run: |
+            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing pyepics
+            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing bottle
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing tinydb
-            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing xrt
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing phpserialize
+            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing xrt
+        if: runner.os == 'Linux'
       - name: Stop docker
         if: runner.os == 'Linux'
         run: |
