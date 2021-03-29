@@ -4,7 +4,9 @@
 
 # Overview
 This is the collection of anaconda recipes for the Paul Scherrer Institute.
-They are automatically built using GitHub workflows (Linux and macOS) and AppVeyor (Windows).
+They are automatically built using GitHub workflows (Linux and macOS) and AppVeyor (Windows) and uploaded to [Anaconda](https://anaconda.org/paulscherrerinstitute).
+
+The build uses conda-build _--skip-existing_ option to avoid unnecessary builds. To force a new build, increase the build number of the recipe.
 
 To build a recipe manually:
 
@@ -13,7 +15,7 @@ conda build <recipe>
 ```
 
 To add a new recipe:
-1. Test the recipe locally.
+1. Test the recipe first.
 2. If the recipe is of pure Python, i.e. _noarch_, add one line at step _Build pure python packages_ in file _.github/workflows/conda_build.yml_.
 3. If the recipe requires compiling,
     1. Add one line at step _Build ${{ runner.os }} Packages_ in file _.github/workflows/conda_build.yml_.
