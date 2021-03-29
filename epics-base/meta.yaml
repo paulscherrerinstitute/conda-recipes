@@ -23,7 +23,8 @@ requirements:
     - {{ compiler('cxx') }}
     - python # [win]
     - make # [not win]
-    - m2w64-make # [win]
+    - m2-make # [win]
+    - m2-patch # [win]
     - perl # [win]
 
 about:
