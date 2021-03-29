@@ -25,9 +25,9 @@ install:
   - setup_x64
   # build
   - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing epics-base
-  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing pyepics
-  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing xrt
   - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing bitshuffle
+  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing lzf
+  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing xrayutilities
 
 on_success:
   - echo "Finished building"
