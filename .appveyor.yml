@@ -24,9 +24,9 @@ install:
   - conda install -c conda-forge vs2008_express_vc_python_patch
   - setup_x64
   # build
-  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing epics-base
-  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing bitshuffle
-  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing lzf
+  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing epics-base || call rem
+  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing bitshuffle || call rem
+  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing lzf || call rem
 
 on_success:
   - echo "Finished building"

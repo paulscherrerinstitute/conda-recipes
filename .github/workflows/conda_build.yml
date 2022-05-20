@@ -56,16 +56,16 @@ jobs:
             ${MY_CONDA_CMD} info
             [[ -z "$MY_CONDA_TOKEN" ]] || ${MY_CONDA_CMD} config --set anaconda_upload yes
             [[ -n "$MY_CONDA_TOKEN" ]] || MY_CONDA_TOKEN=placeholder
-            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing epics-base
-            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing lzf
-            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing bitshuffle
+            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing epics-base || true
+            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing lzf || true
+            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing bitshuffle || true
       - name: Build pure python packages
         run: |
-            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing pyepics
-            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing bottle
-            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing tinydb
-            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing phpserialize
-            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing xrt
+            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing pyepics || true
+            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing bottle || true
+            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing tinydb || true
+            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing phpserialize || true
+            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing xrt || true
         if: runner.os == 'Linux'
       - name: Stop docker
         if: runner.os == 'Linux'
