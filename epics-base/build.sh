@@ -1,35 +1,19 @@
 #!/bin/bash
-install -d $PREFIX/bin
-install -d $PREFIX/lib
-install -d $PREFIX/epics
 
 # export EPICS_HOST_ARCH as determined
+EPICS_BASE=$PREFIX/epics
 EPICS_HOST_ARCH=$(perl src/tools/EpicsHostArch.pl)
-export EPICS_HOST_ARCH
 
 # EPICS assumes gcc suit has /usr/bin prefix.
-# If non-system gcc is used, e.g. rh-devtoolset,
-# find out its location /opt/rh/devtoolset-2/root/usr/bin.
-# GNG_DIR has "bin" stripped.
-GNU_DIR=$(dirname $(dirname $(which gcc)))
-if [ "$GNU_DIR" != "/usr" ]; then
-    echo "GNU_DIR="$GNU_DIR >> configure/CONFIG_COMMON
-fi
+# conda-build define CC
+GNU_DIR=$(dirname $(dirname $CC))
+CMPLR_PREFIX=$(basename ${CC%-*})-
+cat << EOF >> configure/CONFIG_COMMON
+GNU_DIR=$GNU_DIR
+CMPLR_PREFIX=$CMPLR_PREFIX
+EOF
 
 make -j$(getconf _NPROCESSORS_ONLN)
-
-EPICS_BASE=$PREFIX/epics
-
-# Copy libraries into $PREFIX/lib
-cp -av $PREFIX/epics/lib/$EPICS_HOST_ARCH/lib*so* $PREFIX/lib 2>/dev/null || : # linux
-cp -av $PREFIX/epics/lib/$EPICS_HOST_ARCH/lib*dylib* $PREFIX/lib 2>/dev/null || :  # osx
-
-# Setup symlinks for utilities
-# BINS="caget caput camonitor softIoc"
-# cd $PREFIX/bin
-# for file in $BINS ; do
-# 	ln -s ../epics/bin/$EPICS_HOST_ARCH/$file .
-# done
 
 # deal with env export
 mkdir -p $PREFIX/etc/conda/activate.d
