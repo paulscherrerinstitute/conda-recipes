@@ -1,5 +1,5 @@
 {% set name = "pyepics" %}
-{% set version = "3.4.3" %}
+{% set version = "3.5.1" %}
 {% set hash_type = "sha256" %}
 {% set hash_value = "860de6a60b8420afb5f36216769d9e30bca91c501205cb3723529a8f9caed218" %}
 
