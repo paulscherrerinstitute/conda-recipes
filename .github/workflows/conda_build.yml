@@ -60,6 +60,7 @@ jobs:
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing lzf || true
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing bitshuffle || true
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing cachannel || true
+            ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing pcaspy || true
       - name: Build pure python packages
         run: |
             ${MY_CONDA_CMD} build -c $MY_CONDA_CHANNEL --token $MY_CONDA_TOKEN --skip-existing pyepics || true

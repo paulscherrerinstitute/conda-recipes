@@ -28,6 +28,7 @@ install:
   - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing bitshuffle || call rem
   - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing lzf || call rem
   - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing cachannel || call rem
+  - conda build -c %MY_CONDA_CHANNEL% --token %CONDA_TOKEN% --skip-existing pcaspy || call rem
 
 on_success:
   - echo "Finished building"
