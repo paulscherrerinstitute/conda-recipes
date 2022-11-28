@@ -16,7 +16,7 @@ source:
         - darwin-aarch64.diff
 
 build:
-  number: 3
+  number: 4
 
 requirements:
   build:
