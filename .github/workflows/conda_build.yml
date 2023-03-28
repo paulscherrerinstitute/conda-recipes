@@ -41,10 +41,10 @@ jobs:
       - name: Setup Xcode and SDK on macOS
         if: runner.os == 'macOS'
         run: |
-            sudo xcode-select -s "/Applications/Xcode_11.7.app"
-            CONDA_BUILD_SYSROOT="$(xcode-select -p)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
-            [[ -e /opt/MacOSX10.9.sdk ]] || sudo ln -s ${CONDA_BUILD_SYSROOT} /opt/MacOSX10.9.sdk
-            printf "CONDA_BUILD_SYSROOT:\n    - ${CONDA_BUILD_SYSROOT}\n" >> conda_build_config.yaml
+            MACOS_SDK=MacOSX10.9.sdk
+            curl -OL https://github.com/phracker/MacOSX-SDKs/releases/download/10.15/${MACOS_SDK}.tar.xz
+            sudo tar xf ${MACOS_SDK}.tar.xz -C /opt
+            printf "CONDA_BUILD_SYSROOT:\n    - /opt/${MACOS_SDK}\n" >> conda_build_config.yaml
       - name: Setup docker
         if: runner.os == 'Linux'
         run: |
