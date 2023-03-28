@@ -8,7 +8,7 @@ EPICS_HOST_ARCH=$(perl src/tools/EpicsHostArch.pl)
 # conda-build define CC
 GNU_DIR=$(dirname $(dirname $CC))
 CMPLR_PREFIX=$(basename ${CC%-*})-
-cat << EOF >> configure/CONFIG_SITE.Common.linuxCommon
+cat << EOF >> configure/os/CONFIG_SITE.Common.linuxCommon
 GNU_DIR=$GNU_DIR
 CMPLR_PREFIX=$CMPLR_PREFIX
 EOF
