@@ -1,0 +1,93 @@
+--- configure/os/CONFIG.Common.linux-aarch64	1970-01-01 01:00:00
++++ configure/os/CONFIG.Common.linux-aarch64	2023-03-28 11:11:47
+@@ -0,0 +1,11 @@
++# CONFIG.Common.linux-aarch64
++#
++# Definitions for linux-arm target builds
++# Override these settings in CONFIG_SITE.Common.linux-aarch64
++#-------------------------------------------------------
++
++# Include definitions common to all Linux targets
++include $(CONFIG)/os/CONFIG.Common.linuxCommon
++
++ARCH_CLASS = aarch64
++
+--- configure/os/CONFIG.linux-aarch64.Common	1970-01-01 01:00:00
++++ configure/os/CONFIG.linux-aarch64.Common	2023-03-28 11:11:36
+@@ -0,0 +1,8 @@
++# CONFIG.linux-aarch64.Common
++#
++# Definitions for linux-aarch64 host builds
++# Sites may override these definitions in CONFIG_SITE.linux-aarch64.Common
++#-------------------------------------------------------
++
++#Include definitions common to unix hosts
++include $(CONFIG)/os/CONFIG.UnixCommon.Common
+--- configure/os/CONFIG.linux-aarch64.linux-aarch64	1970-01-01 01:00:00
++++ configure/os/CONFIG.linux-aarch64.linux-aarch64	2023-03-28 11:11:24
+@@ -0,0 +1,8 @@
++# CONFIG.linux-aarch64.linux-aarch64
++#
++# Definitions for native linux-aarch64 builds
++# Override these definitions in CONFIG_SITE.linux-aarch64.linux-aarch64
++#-------------------------------------------------------
++
++# Include common gnu compiler definitions
++include $(CONFIG)/CONFIG.gnuCommon
+--- configure/os/CONFIG_SITE.Common.linux-aarch64	1970-01-01 01:00:00
++++ configure/os/CONFIG_SITE.Common.linux-aarch64	2023-03-28 11:11:12
+@@ -0,0 +1,39 @@
++# CONFIG_SITE.Common.linux-aarch64
++#
++# Site Specific definitions for all linux-aarch64 targets
++#-------------------------------------------------------
++
++# NOTE for SHARED_LIBRARIES: In most cases if this is set to YES the
++# shared libraries will be found automatically.  However if the .so
++# files are installed at a different path to their compile-time path
++# then in order to be found at runtime do one of these:
++# a) LD_LIBRARY_PATH must include the full absolute pathname to
++#    $(INSTALL_LOCATION)/lib/$(EPICS_HOST_ARCH) when invoking base
++#    executables.
++# b) Add the runtime path to SHRLIB_DEPLIB_DIRS and PROD_DEPLIB_DIRS, which 
++#    will add the named directory to the list contained in the executables.
++# c) Add the runtime path to /etc/ld.so.conf and run ldconfig
++#    to inform the system of the shared library location.
++
++# Depending on your version of Linux you'll want one of the following
++# lines to enable command-line editing and history in iocsh.  If you're
++# not sure which, start with the top one and work downwards until the
++# build doesn't fail to link the readline library.  If none of them work,
++# comment them all out to build without readline support.
++
++# No other libraries needed (recent Fedora, Ubuntu etc.):
++#COMMANDLINE_LIBRARY = READLINE
++
++# Needs -lncurses (RHEL 5 etc.):
++#COMMANDLINE_LIBRARY = READLINE_NCURSES
++
++# Needs -lcurses (older versions)
++#COMMANDLINE_LIBRARY = READLINE_CURSES
++
++
++# WARNING: Variables that are set in $(CONFIG)/CONFIG.gnuCommon cannot be
++# overridden in this file for native builds, e.g. variables such as
++#    OPT_CFLAGS_YES, WARN_CFLAGS, SHRLIB_LDFLAGS
++# They must be set in CONFIG_SITE.linux-aarch64.linux-aarch64 or for
++# cross-builds in CONFIG_SITE.<host-arch>.linux-aarch64 instead.
++
+--- configure/os/CONFIG_SITE.linux-aarch64.linux-aarch64	1970-01-01 01:00:00
++++ configure/os/CONFIG_SITE.linux-aarch64.linux-aarch64	2023-03-28 11:10:58
+@@ -0,0 +1,12 @@
++# CONFIG_SITE.linux-aarch64.linux-aarch64
++#
++# Site specific definitions for native linux-aarch64 builds
++#-------------------------------------------------------
++
++# It makes sense to include debugging symbols even in optimized builds
++# in case you want to attach gdb to the process or examine a core-dump.
++# This does cost disk space, but not memory as debug symbols are not
++# loaded into RAM when the binary is loaded.
++OPT_CFLAGS_YES += -g
++OPT_CXXFLAGS_YES += -g
++

@@ -14,6 +14,7 @@ source:
         - config_readline.diff # [linux]
         - cas.diff
         - darwin-aarch64.diff
+        - linux-aarch64.diff
 
 build:
   number: 4
