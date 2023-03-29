@@ -6,6 +6,7 @@ python:
     - 3.8
     - 3.9
     - 3.10
+    - 3.11
 numpy:
     - 1.11
     - 1.11
@@ -14,6 +15,7 @@ numpy:
     - 1.11
     - 1.16
     - 1.21
+    - 1.22
 c_compiler:
     - vs2008 # [win]
     - vs2015 # [win]
@@ -22,8 +24,10 @@ c_compiler:
     - vs2015 # [win]
     - vs2015 # [win]
     - vs2015 # [win]
+    - vs2015 # [win]
 cxx_compiler:
     - vs2008 # [win]
+    - vs2015 # [win]
     - vs2015 # [win]
     - vs2015 # [win]
     - vs2015 # [win]
